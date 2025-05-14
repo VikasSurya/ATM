@@ -1,0 +1,75 @@
+#Create a python script to build an atm that allows a user to :
+    
+    
+    # Verify Pin
+    # Check balance
+    # Deposit Money
+    # Withdraw money
+    
+    
+class ATM:
+    
+    def __init__(self,owner,pin,balance=0):
+        self.owner = owner
+        self.balance= balance
+        self.pin=pin
+        
+    def verify_pin(self,input_pin):
+        return self.pin == input_pin
+   
+        
+    def check_balance(self):
+        print(f"{self.owner}, your current balance is {self.balance}")
+        
+    def deposit(self, amount):
+        self.balance = self.balance + amount                                    #10000
+        print(f" Rs.{amount} deposited. New Balance is Rs.{self.balance}")
+        
+    def withdraw(self,amount):
+        if amount > self.balance:
+            print("Not enogh balance")
+        else:
+            self.balance = self.balance - amount
+            print(f" Rs.{amount} withdrawn. New balance is Rs.{self.balance}")
+            
+
+my_account = ATM("Samraat","1234",50000)
+
+
+print("===== Welcome to the ATM=====")
+
+input_pin = input("Please enter your 4-digit PIN:")
+
+if my_account.verify_pin(input_pin):
+    
+    while True:
+        
+        print("\n Choose an option to proceed:")
+        print("1. Check Balance")
+        print("2. Deposit Money")
+        print("3. Withdraw Money")
+        print("4. Exit")
+        
+        choice = input("Enter your choice (1/2/3/4):")
+        
+        if choice == "1":
+            my_account.check_balance()
+            
+        elif choice == "2":
+            amount = int(input("Enter amount to deposit:"))
+            my_account.deposit(amount)
+            
+        elif choice == "3":
+            amount= int(input("Enter amount to withdraw:"))
+            my_account.withdraw(amount)
+            
+        elif choice == "4":
+            print("Thank you for using the ATM. Have a good day !!")
+            break
+            
+        else:
+            print("Invalid Option. Please try again")
+            
+            
+else:
+    print("Wrong PIN ! Access Denied")
